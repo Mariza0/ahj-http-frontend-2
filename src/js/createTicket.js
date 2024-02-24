@@ -1,32 +1,32 @@
 // создание тестовых тикетов при загрузке страницы
 const container = document.querySelector(".list-group");
 
-export function createTickets(json) {
+export default function createTickets(json) {
   // проверяем что элемент не существует на формк
   const elementWithId = document.querySelector(`[data-ticket-id="${json.id}"]`);
-  //console.log(elementWithId,'elementWithId')
 
-  let nameValue;
-  let descriptionValue;
+  let nameTicket;
+  let status;
 
+  // если такой элемент есть, то смотрим есть ли детальное описание. если есть проверяем актуальность
   if (elementWithId) {
-    nameValue = elementWithId.querySelector(".ticket-name");
+    // проверяем изменилось ли имя
+    nameTicket = elementWithId.querySelector(".ticket-name");
 
-    descriptionValue = elementWithId.querySelector(".description");
-
-    if (nameValue.textContent !== json.name) {
-      console.log(nameValue !== json.name);
-      nameValue.textContent = json.name;
-      console.log(nameValue, "nameValue");
-      console.log(elementWithId, "изменили name");
+    if (nameTicket.firstChild.textContent !== json.name) {
+      nameTicket.textContent = json.name;
     }
-    if (descriptionValue.textContent !== json.description) {
-      descriptionValue.textContent = json.description;
-      console.log(elementWithId, "изменили description");
+
+    // проверяем изменился ли статус
+    status = elementWithId.querySelector(".ticket-status").checked;
+    if (status !== json.statusTicket) {
+      status = json.statusTicket;
     }
 
     return;
   }
+
+  // иначе добавляем новый тикет в список
   let newEl = document.createElement("DIV");
   newEl.className = "ticket";
   newEl.setAttribute("data-ticket-id", json.id);
@@ -45,9 +45,9 @@ export function createTickets(json) {
   newName.style.marginRight = `20px`;
   newName.textContent = json.name;
 
-  let description = document.createElement("div");
-  description.className = "description disable";
-  description.textContent = json.description;
+  // let description = document.createElement("div");
+  // description.className = "description disable";
+  // description.textContent = json.description;
 
   // newName.appendChild(description);
 
@@ -86,7 +86,7 @@ export function createTickets(json) {
 
   newEl.appendChild(newStatus);
   newEl.appendChild(newName);
-  newEl.appendChild(description);
+  // newEl.appendChild(description);
 
   let newLi = document.createElement("li");
   newLi.className = "list-group-item";
@@ -99,26 +99,26 @@ export function createTickets(json) {
 // создание первых тестовых тикетов
 const data = [
   {
-    name: "замена картриджа в принтере к201",
-    description: "амена на принтере hp-sm001.",
-    creationDate: "2023-12-30",
-    id: "6e8ad17e-f1c7-4332-8323-fc77897c1fbc",
-    statusTicket: true,
+    "name": "замена картриджа в принтере к201",
+    "description": "амена на принтере hp-sm001.",
+    "creationDate": "2023-12-30",
+    "id": "6e8ad17e-f1c7-4332-8323-fc77897c1fbc",
+    "statusTicket": true
   },
   {
-    name: "переустановка windows pk-Petya к310",
-    description: "доступ к компьютеру после 15-00",
-    creationDate: "2024-01-30",
-    id: "ae16412d-1557-411b-ab0e-bc19fef136b1",
-    statusTicket: false,
+    "name": "переустановка windows pk-Petya к310",
+    "description": "доступ к компьютеру после 15-00",
+    "creationDate": "2024-01-30",
+    "id": "ae16412d-1557-411b-ab0e-bc19fef136b1",
+    "statusTicket": false
   },
   {
-    name: "установить обновление кв-ххх",
-    description:
+    "name": "установить обновление кв-ххх",
+    "description":
       "критическое обновление для windows. \nНе забыть сделать бэкапы",
-    creationDate: "2024-01-20",
-    id: "e749d5d8-8e88-47ad-bf6f-2b3a255df0df",
-    statusTicket: false,
+    "creationDate": "2024-01-20",
+    "id": "e749d5d8-8e88-47ad-bf6f-2b3a255df0df",
+    "statusTicket": false
   },
 ];
 
