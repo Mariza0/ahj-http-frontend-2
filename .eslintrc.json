@@ -1,5 +1,5 @@
 {
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "promise"],
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "env": {
     "es6": true,
@@ -7,11 +7,15 @@
     "jest/globals": true
   },
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": 8
+    
   },
   "rules": {
     
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "no-inner-declarations": "off"
+  
   },
   "overrides": [
     {

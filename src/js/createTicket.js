@@ -99,26 +99,26 @@ export default function createTickets(json) {
 // создание первых тестовых тикетов
 const data = [
   {
-    "name": "замена картриджа в принтере к201",
-    "description": "амена на принтере hp-sm001.",
-    "creationDate": "2023-12-30",
-    "id": "6e8ad17e-f1c7-4332-8323-fc77897c1fbc",
-    "statusTicket": true
+    name: "замена картриджа в принтере к201",
+    description: "амена на принтере hp-sm001.",
+    creationDate: "2023-12-30",
+    id: "6e8ad17e-f1c7-4332-8323-fc77897c1fbc",
+    statusTicket: true,
   },
   {
-    "name": "переустановка windows pk-Petya к310",
-    "description": "доступ к компьютеру после 15-00",
-    "creationDate": "2024-01-30",
-    "id": "ae16412d-1557-411b-ab0e-bc19fef136b1",
-    "statusTicket": false
+    name: "переустановка windows pk-Petya к310",
+    description: "доступ к компьютеру после 15-00",
+    creationDate: "2024-01-30",
+    id: "ae16412d-1557-411b-ab0e-bc19fef136b1",
+    statusTicket: false,
   },
   {
-    "name": "установить обновление кв-ххх",
-    "description":
+    name: "установить обновление кв-ххх",
+    description:
       "критическое обновление для windows. \nНе забыть сделать бэкапы",
-    "creationDate": "2024-01-20",
-    "id": "e749d5d8-8e88-47ad-bf6f-2b3a255df0df",
-    "statusTicket": false
+    creationDate: "2024-01-20",
+    id: "e749d5d8-8e88-47ad-bf6f-2b3a255df0df",
+    statusTicket: false,
   },
 ];
 

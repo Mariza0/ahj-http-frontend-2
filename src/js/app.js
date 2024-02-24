@@ -9,8 +9,7 @@ let btnCancel = document.querySelector(".btn-cancel");
 // Получаем ссылку на элемент для закрытия всплывающего окна
 let closePopup = document.querySelector(".closePopup");
 let ticketCreateButton = document.querySelector(".popup-ticket");
-const ticketPopup = document.querySelector('.popup-ticket');
-
+const ticketPopup = document.querySelector(".popup-ticket");
 
 // запрашиваем сервер на наличие новых тикетов
 export function checkTickets() {
@@ -38,7 +37,6 @@ export function checkTickets() {
 
         // отрисовываем тикеты
         createFormTickets(data);
-        console.log(data,'data')
       } catch (e) {
         console.error(e);
       }
@@ -80,9 +78,7 @@ ticketCreateButton.addEventListener("submit", (e) => {
   const body = new FormData(ticketPopup);
   ticketCreate(body);
 
-
   // обновляем список тикетов
-  console.log("отриосвываем тикеты");
   checkTickets();
 
   ticketPopup.style.display = "none";
