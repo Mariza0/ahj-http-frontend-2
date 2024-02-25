@@ -2,16 +2,16 @@
 import { checkTickets } from "./app";
 import RequestHandler from "./requests";
 
-let url;
+// let url;
 
-if (
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1"
-) {
-  url = "http://localhost:7070";
-} else {
-  url = "https://ahj-http-backend.onrender.com:10000";
-}
+// if (
+//   window.location.hostname === "localhost" ||
+//   window.location.hostname === "127.0.0.1"
+// ) {
+//   url = "http://localhost:7070";
+// } else {
+const url = "http://localhost:7070"; //"https://ahj-http-backend.onrender.com:10000/";
+// }
 
 
 const request = new RequestHandler(url);

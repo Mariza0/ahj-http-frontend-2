@@ -12,37 +12,37 @@ let closePopup = document.querySelector(".closePopup");
 let ticketCreateButton = document.querySelector(".popup-ticket");
 const ticketPopup = document.querySelector(".popup-ticket");
 
-let url;
+// let url;
 
-if (
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1"
-) {
-  url = "http://localhost:7070";
-} else {
-  url = `https://ahj-http-backend.onrender.com:10000`;
-}
+// if (
+//   window.location.hostname === "localhost" ||
+//   window.location.hostname === "127.0.0.1"
+// ) {
+//   url = "http://localhost:7070";
+// } else {
+  const url = "http://localhost:7070";  //`https://ahj-http-backend.onrender.com:10000`;
+// }
 
 
 
-const req = new RequestHandler(url);
+// const req = new RequestHandler(url);
 
 // запрашиваем сервер на наличие новых тикетов
 export function checkTickets() {
   console.log("запрос на сервер");
-  //const xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
 
   if (isFirstLoad) {
     const loadingIndicator = document.querySelector(".loading-indicator");
     loadingIndicator.style.display = "flex";
   }
 
-  req.xhr.open("GET", `${req.url}?method=allTickets`);
+  xhr.open("GET", `${url}?method=allTickets`);
   // req.xhr.setRequestHeader("Content-Type", "application/json"); // Установка заголовка Content-Type
   // req.xhr.setRequestHeader("Accept", "application/json"); // Установка заголовка Accept
 
-  req.xhr.addEventListener("load", () => {
-    if (req.xhr.status >= 200 && req.xhr.status < 300) {
+  xhr.addEventListener("load", () => {
+    if (xhr.status >= 200 && xhr.status < 300) {
       try {
         // Скрыть индикатор загрузки
         if (isFirstLoad) {
@@ -51,7 +51,7 @@ export function checkTickets() {
           isFirstLoad = false; // Устанавливаем флаг как false после первой загрузки
         }
 
-        const data = JSON.parse(req.xhr.responseText);
+        const data = JSON.parse(xhr.responseText);
 
         // отрисовываем тикеты
         createFormTickets(data);
@@ -61,7 +61,7 @@ export function checkTickets() {
     }
   });
 
-  req.xhr.send();
+  xhr.send();
 }
 
 setInterval(checkTickets, 10000);
