@@ -79,7 +79,7 @@ ticketCreateButton.addEventListener("submit", (e) => {
 
   // создаем http запрос для отправки данных формы на сервер
   const body = new FormData(ticketPopup);
-  xhr.ticketCreate(body);
+  req.ticketCreate(body);
 
   // обновляем список тикетов
   checkTickets();
