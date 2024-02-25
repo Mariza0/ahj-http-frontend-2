@@ -25,7 +25,7 @@ const ticketPopup = document.querySelector(".popup-ticket");
 
 
 
-// const req = new RequestHandler(url);
+const req = new RequestHandler(url);
 
 // запрашиваем сервер на наличие новых тикетов
 export function checkTickets() {
@@ -94,7 +94,7 @@ ticketCreateButton.addEventListener("submit", (e) => {
 
   // создаем http запрос для отправки данных формы на сервер
   const body = new FormData(ticketPopup);
-  xhr.ticketCreate(body);
+  req.ticketCreate(body);
 
   // обновляем список тикетов
   checkTickets();
