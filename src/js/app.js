@@ -38,8 +38,8 @@ export function checkTickets() {
   }
 
   req.xhr.open("GET", `${req.url}?method=allTickets`);
-  req.xhr.setRequestHeader("Content-Type", "application/json"); // Установка заголовка Content-Type
-  req.xhr.setRequestHeader("Accept", "application/json"); // Установка заголовка Accept
+  // req.xhr.setRequestHeader("Content-Type", "application/json"); // Установка заголовка Content-Type
+  // req.xhr.setRequestHeader("Accept", "application/json"); // Установка заголовка Accept
 
   req.xhr.addEventListener("load", () => {
     if (req.xhr.status >= 200 && req.xhr.status < 300) {
