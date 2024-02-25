@@ -1,13 +1,13 @@
 export default class RequestHandler {
   constructor() {
-    if (
-      window.location.hostname === "localhost" ||
-      window.location.hostname === "127.0.0.1"
-    ) {
+    // if (
+    //   window.location.hostname === "localhost" ||
+    //   window.location.hostname === "127.0.0.1"
+    // ) {
       this.url = "http://localhost:7070";
-    } else {
-      this.url = "https://ahj-http-backend.onrender.com:10000";
-    }
+    // } else {
+    //   this.url = "https://ahj-http-backend.onrender.com:10000";
+    // }
     this.xhr = new XMLHttpRequest();
   }
 
