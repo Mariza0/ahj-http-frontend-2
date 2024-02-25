@@ -10,7 +10,7 @@ import RequestHandler from "./requests";
 // ) {
 //   url = "http://localhost:7070";
 // } else {
-const url = "http://localhost:7070"; //"https://ahj-http-backend.onrender.com:10000/";
+const url = "https://ahj-http-backend.onrender.com:10000/";
 // }
 
 
