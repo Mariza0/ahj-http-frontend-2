@@ -12,7 +12,20 @@ let closePopup = document.querySelector(".closePopup");
 let ticketCreateButton = document.querySelector(".popup-ticket");
 const ticketPopup = document.querySelector(".popup-ticket");
 
-const req = new RequestHandler();
+let url;
+
+if (
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+) {
+  url = "http://localhost:7070";
+} else {
+  url = "https://ahj-http-backend.onrender.com:10000";
+}
+
+
+
+const req = new RequestHandler(url);
 
 // запрашиваем сервер на наличие новых тикетов
 export function checkTickets() {
