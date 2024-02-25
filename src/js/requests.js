@@ -1,65 +1,77 @@
-// СОЗДАНИЕ ТИКЕТА
-export function ticketCreate(body) {
-  const xhr = new XMLHttpRequest();
+export default class RequestHandler {
+  constructor() {
+    // if (
+    //   window.location.hostname === "localhost" ||
+    //   window.location.hostname === "127.0.0.1"
+    // ) {
+      // this.url = "http://localhost:7070";
+    // } else {
+      this.url = "https://ahj-http-backend.onrender.com:10000";
+    // }
+    this.xhr = new XMLHttpRequest();
+  }
 
-  xhr.open("POST", "http://localhost:7070?method=createTicket");
+  // СОЗДАНИЕ ТИКЕТА
+  ticketCreate(body) {
+    this.xhr.open("POST", `${this.url}?method=createTicket`);
 
-  xhr.send(body);
-}
+    this.xhr.send(body);
+  }
 
-// УДАЛЕНИЕ ТИКЕТ
-export function requestDelete(id) {
-  const xhr = new XMLHttpRequest();
+  // УДАЛЕНИЕ ТИКЕТ
+  requestDelete(id) {
+    this.xhr.open("DELETE", `${this.url}?method=deleteTicket&id=${id}`);
 
-  xhr.open("DELETE", `http://localhost:7070?method=deleteTicket&id=${id}`);
+    this.xhr.setRequestHeader(
+      "Content-type",
+      "application/x-www-form-urlencoded"
+    );
 
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    this.xhr.send();
+  }
 
-  xhr.send();
-}
+  // ИЗМЕНЕНИЕ ТИКЕТА
+  requestChange(id, body) {
+    this.xhr.open("POST", `${this.url}?method=changeTicket&id=${id}`);
 
-// ИЗМЕНЕНИЕ ТИКЕТА
-export function requestChange(id, body) {
-  const xhr = new XMLHttpRequest();
+    this.xhr.send(body);
+  }
 
-  xhr.open("POST", `http://localhost:7070?method=changeTicket&id=${id}`);
+  // ДЕТАЛЬНОЕ ОПИСАНИЕ
+  getDesctiption(id) {
+    return new Promise((resolve, reject) => {
+      this.xhr.open("GET", `${this.url}?method=getDescription&id=${id}`);
 
-  xhr.send(body);
-}
+      this.xhr.addEventListener("load", () => {
+        let desc;
+        if (this.xhr.status >= 200 && this.xhr.status < 300) {
+          try {
+            desc = this.xhr.responseText;
 
-// ДЕТАЛЬНОЕ ОПИСАНИЕ
-export function getDesctiption(id) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", `http://localhost:7070?method=getDescription&id=${id}`);
-
-    xhr.addEventListener("load", () => {
-      let desc;
-      if (xhr.status >= 200 && xhr.status < 300) {
-        try {
-          desc = xhr.responseText;
-
-          resolve(desc);
-        } catch (e) {
-          console.error(e);
+            resolve(desc);
+          } catch (e) {
+            console.error(e);
+          }
+        } else {
+          reject(new Error(`Request failed with status ${this.xhr.status}`));
         }
-      } else {
-        reject(new Error(`Request failed with status ${xhr.status}`));
-      }
+      });
+
+      this.xhr.send();
     });
+  }
 
-    xhr.send();
-  });
-}
+  // ИЗМЕНЕНИЕ СТАТУСА ТИКЕТА
+  changeStatus(id, status) {
+    this.xhr.open(
+      "POST",
+      `${this.url}?method=changeStatus&id=${id}&status=${status}`
+    );
+    this.xhr.setRequestHeader(
+      "Content-type",
+      "application/x-www-form-urlencoded"
+    );
 
-// ИЗМЕНЕНИЕ СТАТУСА ТИКЕТА
-export function changeStatus(id, status) {
-  const xhr = new XMLHttpRequest();
-  xhr.open(
-    "POST",
-    `http://localhost:7070?method=changeStatus&id=${id}&status=${status}`
-  );
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-  xhr.send();
+    this.xhr.send();
+  }
 }

@@ -1,6 +1,7 @@
 // import "./createTicket";
 import createTickets from "./createTicket";
-import { ticketCreate } from "./requests";
+//import { ticketCreate } from "./requests";
+import RequestHandler from "./requests";
 import "./changeTicket";
 
 let isFirstLoad = true;
@@ -11,20 +12,22 @@ let closePopup = document.querySelector(".closePopup");
 let ticketCreateButton = document.querySelector(".popup-ticket");
 const ticketPopup = document.querySelector(".popup-ticket");
 
+const req = new RequestHandler();
+
 // запрашиваем сервер на наличие новых тикетов
 export function checkTickets() {
   console.log("запрос на сервер");
-  const xhr = new XMLHttpRequest();
+  //const xhr = new XMLHttpRequest();
 
   if (isFirstLoad) {
     const loadingIndicator = document.querySelector(".loading-indicator");
     loadingIndicator.style.display = "flex";
   }
 
-  xhr.open("GET", "http://localhost:7070?method=allTickets");
+  req.xhr.open("GET", `${req.url}?method=allTickets`);
 
-  xhr.addEventListener("load", () => {
-    if (xhr.status >= 200 && xhr.status < 300) {
+  req.xhr.addEventListener("load", () => {
+    if (req.xhr.status >= 200 && req.xhr.status < 300) {
       try {
         // Скрыть индикатор загрузки
         if (isFirstLoad) {
@@ -33,7 +36,7 @@ export function checkTickets() {
           isFirstLoad = false; // Устанавливаем флаг как false после первой загрузки
         }
 
-        const data = JSON.parse(xhr.responseText);
+        const data = JSON.parse(req.xhr.responseText);
 
         // отрисовываем тикеты
         createFormTickets(data);
@@ -43,7 +46,7 @@ export function checkTickets() {
     }
   });
 
-  xhr.send();
+  req.xhr.send();
 }
 
 setInterval(checkTickets, 10000);
@@ -76,7 +79,7 @@ ticketCreateButton.addEventListener("submit", (e) => {
 
   // создаем http запрос для отправки данных формы на сервер
   const body = new FormData(ticketPopup);
-  ticketCreate(body);
+  xhr.ticketCreate(body);
 
   // обновляем список тикетов
   checkTickets();

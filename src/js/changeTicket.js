@@ -1,5 +1,8 @@
-import * as request from "./requests";
+//import * as request from "./requests";
 import { checkTickets } from "./app";
+import RequestHandler from "./requests";
+
+const request = new RequestHandler();
 
 const formChange = document.querySelector(".popup-ticket_change");
 
