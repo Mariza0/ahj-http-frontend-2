@@ -1,5 +1,5 @@
 import createTickets from "./createTicket";
-import RequestHandler from "./requests";
+import * as req from "./requests";
 import "./changeTicket";
 
 let isFirstLoad = true;
@@ -53,6 +53,7 @@ setInterval(checkTickets, 10000);
 // передача тикетов на форму в браузер
 
 function createFormTickets(jsonMassive) {
+  console.log(jsonMassive,'jsonMassive')
   for (const item of jsonMassive) {
     createTickets(item);
   }
@@ -67,6 +68,7 @@ btnPopup.addEventListener("click", function () {
 
 // СОЗДАНИЕ НОВОГО ТИКЕТА
 const create = (e) => {
+
   ticketCreateButton.removeEventListener("submit", create);
   e.preventDefault();
 
@@ -79,10 +81,8 @@ const create = (e) => {
   }
 
   // создаем http запрос для отправки данных формы на сервер
-  const xhr = new XMLHttpRequest();
   const body = new FormData(ticketPopup);
-  xhr.open("POST", `${url}?method=createTicket`);
-  xhr.send(body);
+  req.ticketCreate(body);
 
   // обновляем список тикетов
   checkTickets();

@@ -1,9 +1,7 @@
 import { checkTickets } from "./app";
-import RequestHandler from "./requests";
+import * as request from "./requests";
 
 const url = "http://localhost:7070";
-
-const request = new RequestHandler(url);
 
 const formChange = document.querySelector(".popup-ticket_change");
 
