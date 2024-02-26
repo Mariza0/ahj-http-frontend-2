@@ -12,7 +12,7 @@ const ticketPopup = document.querySelector(".popup-ticket");
 
 const url = "http://localhost:7070";
 
-const req = new RequestHandler();
+const xhr = new XMLHttpRequest();
 
 // запрашиваем сервер на наличие новых тикетов
 export function checkTickets() {
@@ -23,10 +23,10 @@ export function checkTickets() {
     loadingIndicator.style.display = "flex";
   }
 
-  req.xhr.open("GET", `${url}?method=allTickets`);
+  xhr.open("GET", `${url}?method=allTickets`);
 
-  req.xhr.addEventListener("load", () => {
-    if (req.xhr.status >= 200 && req.xhr.status < 300) {
+  xhr.addEventListener("load", () => {
+    if (xhr.status >= 200 && xhr.status < 300) {
       try {
         // Скрыть индикатор загрузки
         if (isFirstLoad) {
@@ -35,7 +35,7 @@ export function checkTickets() {
           isFirstLoad = false; // Устанавливаем флаг как false после первой загрузки
         }
 
-        const data = JSON.parse(req.xhr.responseText);
+        const data = JSON.parse(xhr.responseText);
 
         // отрисовываем тикеты
         createFormTickets(data);
@@ -45,7 +45,7 @@ export function checkTickets() {
     }
   });
 
-  req.xhr.send();
+  xhr.send();
 }
 
 setInterval(checkTickets, 10000);
@@ -72,11 +72,13 @@ ticketCreateButton.addEventListener("submit", (e) => {
   let nameValue = ticketPopup.querySelector(".input-class").value.trim();
 
   if (nameValue === "") {
-    ticketPopup.style.display = "none";
+    //ticketPopup.style.display = "none";
+    alert('Краткое описание не может быть пустым')
     return;
   }
 
   // создаем http запрос для отправки данных формы на сервер
+  const req = new RequestHandler(url);
   const body = new FormData(ticketPopup);
   req.ticketCreate(body);
 
