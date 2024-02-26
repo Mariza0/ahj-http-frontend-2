@@ -66,7 +66,8 @@ btnPopup.addEventListener("click", function () {
 });
 
 // СОЗДАНИЕ НОВОГО ТИКЕТА
-ticketCreateButton.addEventListener("submit", (e) => {
+const create = (e) => {
+  ticketCreateButton.removeEventListener("submit", create);
   e.preventDefault();
 
   let nameValue = ticketPopup.querySelector(".input-class").value.trim();
@@ -87,8 +88,11 @@ ticketCreateButton.addEventListener("submit", (e) => {
   checkTickets();
 
   ticketPopup.style.display = "none";
-  return;
-});
+  ticketPopup.querySelector(".input-class").value = '';
+  // return;
+}
+
+ticketCreateButton.addEventListener("submit", create);
 
 // Закрываем всплывающее окно при клике на крестик
 closePopup.addEventListener("click", function (event) {
