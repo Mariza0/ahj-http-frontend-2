@@ -45,12 +45,6 @@ export default function createTickets(json) {
   newName.style.marginRight = `20px`;
   newName.textContent = json.name;
 
-  // let description = document.createElement("div");
-  // description.className = "description disable";
-  // description.textContent = json.description;
-
-  // newName.appendChild(description);
-
   // дата создания
   let newDate = document.createElement("div");
   newDate.className = "ticket-cteate_date";
