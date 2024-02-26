@@ -10,6 +10,7 @@
 
   // УДАЛЕНИЕ ТИКЕТ
   export function requestDelete(id) {
+    const xhr = new XMLHttpRequest();
     xhr.open("DELETE", `${url}?method=deleteTicket&id=${id}`);
 
     xhr.setRequestHeader(
@@ -22,6 +23,7 @@
 
   // ИЗМЕНЕНИЕ ТИКЕТА
   export function requestChange(id, body) {
+    const xhr = new XMLHttpRequest();
     xhr.open("POST", `${url}?method=changeTicket&id=${id}`);
 
     xhr.send(body);
@@ -29,6 +31,7 @@
 
   // ДЕТАЛЬНОЕ ОПИСАНИЕ
   export function getDesctiption(id) {
+    const xhr = new XMLHttpRequest();
     return new Promise((resolve, reject) => {
       xhr.open("GET", `${url}?method=getDescription&id=${id}`);
 
@@ -53,6 +56,7 @@
 
   // ИЗМЕНЕНИЕ СТАТУСА ТИКЕТА
   export function changeStatus(id, status) {
+    const xhr = new XMLHttpRequest();
     xhr.open(
       "POST",
       `${url}?method=changeStatus&id=${id}&status=${status}`

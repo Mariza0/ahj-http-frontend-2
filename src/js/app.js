@@ -1,18 +1,17 @@
 import createTickets from "./createTicket";
-import * as req from "./requests";
+import { ticketCreate } from "./requests";
 import "./changeTicket";
 
 let isFirstLoad = true;
 
-let btnCancel = document.querySelector(".btn-cancel");
+const btnCancel = document.querySelector(".btn-cancel");
+const btnPopup = document.querySelector(".popup");
 // Получаем ссылку на элемент для закрытия всплывающего окна
 let closePopup = document.querySelector(".closePopup");
-let ticketCreateButton = document.querySelector(".popup-ticket");
+// let ticketCreateButton = document.querySelector(".popup");//(".popup-ticket");
 const ticketPopup = document.querySelector(".popup-ticket");
 
 const url = "http://localhost:7070";
-
-const xhr = new XMLHttpRequest();
 
 // запрашиваем сервер на наличие новых тикетов
 export function checkTickets() {
@@ -22,6 +21,7 @@ export function checkTickets() {
     const loadingIndicator = document.querySelector(".loading-indicator");
     loadingIndicator.style.display = "flex";
   }
+  const xhr = new XMLHttpRequest();
 
   xhr.open("GET", `${url}?method=allTickets`);
 
@@ -59,8 +59,6 @@ function createFormTickets(jsonMassive) {
   }
 }
 
-let btnPopup = document.querySelector(".popup");
-
 // Открываем всплывающее окно при клике на кнопку
 btnPopup.addEventListener("click", function () {
   ticketPopup.style.display = "flex";
@@ -69,7 +67,6 @@ btnPopup.addEventListener("click", function () {
 // СОЗДАНИЕ НОВОГО ТИКЕТА
 const create = (e) => {
 
-  ticketCreateButton.removeEventListener("submit", create);
   e.preventDefault();
 
   let nameValue = ticketPopup.querySelector(".input-class").value.trim();
@@ -82,17 +79,19 @@ const create = (e) => {
 
   // создаем http запрос для отправки данных формы на сервер
   const body = new FormData(ticketPopup);
-  req.ticketCreate(body);
+  ticketCreate(body);
 
   // обновляем список тикетов
   checkTickets();
 
+  ticketPopup.reset();
   ticketPopup.style.display = "none";
-  ticketPopup.querySelector(".input-class").value = '';
-  // return;
+  // ticketPopup.removeEventListener("submit", create);
+ 
+  return;
 }
 
-ticketCreateButton.addEventListener("submit", create);
+ticketPopup.addEventListener("submit", create);
 
 // Закрываем всплывающее окно при клике на крестик
 closePopup.addEventListener("click", function (event) {
@@ -107,8 +106,9 @@ btnCancel.addEventListener("click", function (event) {
 });
 
 // Закрываем всплывающее окно при клике вне него
-ticketCreateButton.addEventListener("click", function (event) {
+ticketPopup.addEventListener("click", function (event) {
   if (event.target == ticketPopup) {
+    ticketPopup.reset();
     ticketPopup.style.display = "none";
   }
 });
