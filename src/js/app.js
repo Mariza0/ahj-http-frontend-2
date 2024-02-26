@@ -78,9 +78,10 @@ ticketCreateButton.addEventListener("submit", (e) => {
   }
 
   // создаем http запрос для отправки данных формы на сервер
-  const req = new RequestHandler(url);
+  const xhr = new XMLHttpRequest();
   const body = new FormData(ticketPopup);
-  req.ticketCreate(body);
+  xhr.open("POST", `${url}?method=createTicket`);
+  xhr.send(body);
 
   // обновляем список тикетов
   checkTickets();

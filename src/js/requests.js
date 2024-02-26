@@ -4,12 +4,12 @@ export default class RequestHandler {
     this.xhr = new XMLHttpRequest();
   }
 
-  // СОЗДАНИЕ ТИКЕТА
-  ticketCreate(body) {
-    this.xhr.open("POST", `${this.url}?method=createTicket`);
+  // // СОЗДАНИЕ ТИКЕТА
+  // ticketCreate(body) {
+  //   this.xhr.open("POST", `${this.url}?method=createTicket`);
 
-    this.xhr.send(body);
-  }
+  //   this.xhr.send(body);
+  // }
 
   // УДАЛЕНИЕ ТИКЕТ
   requestDelete(id) {
