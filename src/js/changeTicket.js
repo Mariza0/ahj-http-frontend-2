@@ -127,7 +127,10 @@ ticketPopup.addEventListener("click", function (event) {
       }
     });
 
-    ticketDelete.addEventListener("submit", (e) => {
+    const del = (e) => {
+
+      ticketDelete.removeEventListener("submit", del);
+
       e.preventDefault();
 
       //удаляем на сервере
@@ -138,7 +141,9 @@ ticketPopup.addEventListener("click", function (event) {
 
       ticketDelete.style.display = "none";
       return;
-    });
+    }
+
+    ticketDelete.addEventListener("submit", del);
   }
 
   // ПОЛУЧАЕМ Description
