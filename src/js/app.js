@@ -79,9 +79,11 @@ const create = (e) => {
 
   // создаем http запрос для отправки данных формы на сервер
   const body = new FormData(ticketPopup);
+  console.log(body,'body')
   ticketCreate(body);
 
   // обновляем список тикетов
+ 
   checkTickets();
 
   ticketPopup.reset();
