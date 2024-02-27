@@ -24,7 +24,7 @@ if (target.classList.contains("popup")) {
   ticketPopup.style.display = "flex";
 
 // СОЗДАНИЕ НОВОГО ТИКЕТА
-const create = (e) => {
+const create = async (e) => {
 
   e.preventDefault();
 
@@ -37,18 +37,37 @@ const create = (e) => {
     return;
   }
 
-  // создаем http запрос для отправки данных формы на сервер
   const body = new FormData(ticketPopup);
-  ticketCreate(body);
+
+  try {
+    // Отправляем данные на сервер для создания тикета
+    
+    await ticketCreate(body);
+
+    // Вызываем функцию, которая будет обновлять список тикетов после успешного создания
+    checkTickets();;
+
+    // Сбрасываем форму и скрываем всплывающее окно
+    ticketPopup.reset();
+    ticketPopup.style.display = "none";
+  } catch (error) {
+    console.error("Error creating ticket:", error);
+    // Здесь можно добавить обработку ошибки, если необходимо
+  }
+  
+
+  // создаем http запрос для отправки данных формы на сервер
+  //const body = new FormData(ticketPopup);
+  //ticketCreate(body);
 
   // обновляем список тикетов
-  checkTickets();
+  // checkTickets();
 
-  ticketPopup.reset();
-  ticketPopup.style.display = "none";
-  ticketPopup.removeEventListener("submit", create);
+  // ticketPopup.reset();
+  // ticketPopup.style.display = "none";
+  // ticketPopup.removeEventListener("submit", create);
  
-  return;
+  // return;
 }
 
 ticketPopup.addEventListener("submit", create);

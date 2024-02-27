@@ -1,7 +1,7 @@
 
   const url = "http://localhost:7070";
   // СОЗДАНИЕ ТИКЕТА
-  export function ticketCreate(body) {
+  export async function ticketCreate(body) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${url}?method=createTicket`);
 

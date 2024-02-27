@@ -1,15 +1,15 @@
 import createTickets from "./createTicket";
-import { ticketCreate } from "./requests";
+//import { ticketCreate } from "./requests";
 import "./changeTicket";
 
 let isFirstLoad = true;
 
-const btnCancel = document.querySelector(".btn-cancel-create");
-const btnPopup = document.querySelector(".popup");
+//const btnCancel = document.querySelector(".btn-cancel-create");
+//const btnPopup = document.querySelector(".popup");
 // Получаем ссылку на элемент для закрытия всплывающего окна
-let closePopup = document.querySelector(".closePopup");
+//let closePopup = document.querySelector(".closePopup");
 // let ticketCreateButton = document.querySelector(".popup");//(".popup-ticket");
-const ticketPopup = document.querySelector(".popup-ticket");
+//const ticketPopup = document.querySelector(".popup-ticket");
 
 const url = "http://localhost:7070";
 
