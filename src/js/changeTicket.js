@@ -33,6 +33,7 @@ const create = async (e) => {
   console.log(nameValue,"namevalue")
   if (nameValue === "") {
     //ticketPopup.style.display = "none";
+    ticketPopup.removeEventListener("submit", create);
     alert('Краткое описание не может быть пустым')
     return;
   }
@@ -50,8 +51,8 @@ const create = async (e) => {
     checkTickets();
 
     // Сбрасываем форму и скрываем всплывающее окно
-    ticketPopup.reset();
-    ticketPopup.removeEventListener("submit", create);
+    // ticketPopup.reset();
+    // ticketPopup.removeEventListener("submit", create);
     ticketPopup.style.display = "none";
   } catch (error) {
     console.error("Error creating ticket:", error);
