@@ -51,8 +51,8 @@ const create = async (e) => {
     checkTickets();
 
     // Сбрасываем форму и скрываем всплывающее окно
-    // ticketPopup.reset();
-    // ticketPopup.removeEventListener("submit", create);
+    ticketPopup.reset();
+    ticketPopup.removeEventListener("submit", create);
     ticketPopup.style.display = "none";
   } catch (error) {
     console.error("Error creating ticket:", error);
