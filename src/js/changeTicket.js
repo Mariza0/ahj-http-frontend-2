@@ -41,14 +41,17 @@ const create = async (e) => {
 
   try {
     // Отправляем данные на сервер для создания тикета
-    
+    console.log('создаем тикет')
     await ticketCreate(body);
+  
 
     // Вызываем функцию, которая будет обновлять список тикетов после успешного создания
-    checkTickets();;
+    console.log('запрос на сервер на наличие новых тикетов')
+    checkTickets();
 
     // Сбрасываем форму и скрываем всплывающее окно
     ticketPopup.reset();
+    ticketPopup.removeEventListener("submit", create);
     ticketPopup.style.display = "none";
   } catch (error) {
     console.error("Error creating ticket:", error);
