@@ -93,6 +93,10 @@ label {
   width: 100%; 
 }
 
+.input-class_create {
+  width: 100%; 
+}
+
 textarea {
   width: 100%; 
 }

@@ -1,9 +1,14 @@
 import { checkTickets } from "./app";
 import * as request from "./requests";
+import  {ticketCreate} from "./requests";
 
 const url = "http://localhost:7070";
 
 const formChange = document.querySelector(".popup-ticket_change");
+const ticketPopup = document.querySelector(".popup-ticket");
+const closePopupCreate = document.querySelector(".closePopup-create");
+const btnCancelCreate = document.querySelector(".btn-cancel-create");
+
 
 document.addEventListener("click", async (event) => {
   const target = event.target;
@@ -12,6 +17,64 @@ document.addEventListener("click", async (event) => {
   if (parent) {
     id = parent.querySelector(".ticket").getAttribute("data-ticket-id");
   }
+ 
+ // Открываем всплывающее окно при клике на кнопку
+if (target.classList.contains("popup")) {
+
+  ticketPopup.style.display = "flex";
+
+// СОЗДАНИЕ НОВОГО ТИКЕТА
+const create = (e) => {
+
+  e.preventDefault();
+
+  const nameValue = ticketPopup.querySelector(".input-class_create").value.trim();
+
+  console.log(nameValue,"namevalue")
+  if (nameValue === "") {
+    //ticketPopup.style.display = "none";
+    alert('Краткое описание не может быть пустым')
+    return;
+  }
+
+  // создаем http запрос для отправки данных формы на сервер
+  const body = new FormData(ticketPopup);
+  ticketCreate(body);
+
+  // обновляем список тикетов
+  checkTickets();
+
+  ticketPopup.reset();
+  ticketPopup.style.display = "none";
+  ticketPopup.removeEventListener("submit", create);
+ 
+  return;
+}
+
+ticketPopup.addEventListener("submit", create);
+
+// Закрываем всплывающее окно при клике на крестик
+closePopupCreate.addEventListener("click", function (event) {
+  event.preventDefault();
+  ticketPopup.reset();
+  ticketPopup.style.display = "none";
+});
+
+// Закрываем окно при отмене
+btnCancelCreate.addEventListener("click", function (event) {
+  event.preventDefault();
+  ticketPopup.reset();
+  ticketPopup.style.display = "none";
+});
+
+// Закрываем всплывающее окно при клике вне него
+ticketPopup.addEventListener("click", function (event) {
+  if (event.target == ticketPopup) {
+    ticketPopup.reset();
+    ticketPopup.style.display = "none";
+  }
+});
+};
 
   // ИЗМЕНЯЕМ СТАТУС ТИКЕТА
   if (target.classList.contains("ticket-status")) {
