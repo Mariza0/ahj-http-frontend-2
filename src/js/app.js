@@ -88,7 +88,7 @@ const create = (e) => {
 
   ticketPopup.reset();
   ticketPopup.style.display = "none";
-  // ticketPopup.removeEventListener("submit", create);
+  ticketPopup.removeEventListener("submit", create);
  
   return;
 }
