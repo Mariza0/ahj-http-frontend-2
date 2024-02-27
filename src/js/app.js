@@ -4,7 +4,7 @@ import "./changeTicket";
 
 let isFirstLoad = true;
 
-const btnCancel = document.querySelector(".btn-cancel");
+const btnCancel = document.querySelector(".btn-cancel-create");
 const btnPopup = document.querySelector(".popup");
 // Получаем ссылку на элемент для закрытия всплывающего окна
 let closePopup = document.querySelector(".closePopup");
@@ -98,12 +98,14 @@ ticketPopup.addEventListener("submit", create);
 // Закрываем всплывающее окно при клике на крестик
 closePopup.addEventListener("click", function (event) {
   event.preventDefault();
+  ticketPopup.reset();
   ticketPopup.style.display = "none";
 });
 
 // Закрываем окно при отмене
 btnCancel.addEventListener("click", function (event) {
   event.preventDefault();
+  ticketPopup.reset();
   ticketPopup.style.display = "none";
 });
 
