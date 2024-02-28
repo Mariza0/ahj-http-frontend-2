@@ -43,7 +43,11 @@ const create = async (e) => {
   try {
     // Отправляем данные на сервер для создания тикета
     console.log('создаем тикет')
-    await ticketCreate(body);
+    //await ticketCreate(body)
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${url}?method=createTicket`);
+
+    xhr.send(body);
   
 
     // Вызываем функцию, которая будет обновлять список тикетов после успешного создания
