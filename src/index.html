@@ -35,16 +35,21 @@
         <p class="name-popup">Создание тикета</p>
       </div>
       <label for="name">краткое описание</label>
-      <input type="text" class="input-class_create" id="name" name="name" maxlength="50"></label>
+      <input type="text" class="input-class_create" name="name" maxlength="50"></label>
+      <!-- <input type="text" class="input-class_create" id="name" name="name" maxlength="50"></label> -->
+      <!-- <input type="text" class="input-class_create" maxlength="50"></label> -->
     </div>
     <div class="form-group">
       <label for="description">подробное описание</label>
       <textarea id="description" class="description-popup" name="description"></textarea>
+      <!-- <textarea id="description" class="description-popup"></textarea> -->
     </div>
     <!-- <div class="form-group"> -->
       <!-- <label for="creationDate">дата создания</label> -->
-      <input type="hidden" class ="creation-date" name="creationDate" id="creationDate" value="" readonly>
-      <input type="hidden" class ="statusTicket" name="statusTicket" id="statusTicket" value="" readonly>
+      <!-- <input type="hidden" class ="creation-date" name="creationDate" id="creationDate" value="" readonly>
+      <input type="hidden" class ="statusTicket" name="statusTicket" id="statusTicket" value="" readonly> -->
+      <input type="hidden" class ="creation-date" readonly>
+      <input type="hidden" class ="statusTicket"  readonly>
     <!-- </div> -->
     <div class="form-group_last">
       <button class="btn-cancel-create btn btn-outline-danger">отмена</button>
